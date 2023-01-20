@@ -16,7 +16,7 @@ public typealias SelectionClosure = (Index, String) -> Void
 public typealias MultiSelectionClosure = ([Index], [String]) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
-public typealias SelectionTextColorConfigurationClosure = (Index) -> UIColor?
+public typealias SelectionTextColorConfigurationClosure = (Index, DropDownCell) -> UIColor?
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 /// Can be `UIView` or `UIBarButtonItem`.
@@ -1085,7 +1085,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
         cell.normalTextColor = textColor
 		
         if let cellConfiguration = selectionTextColorConfiguration {
-            cell.highlightTextColor = cellConfiguration(index) ?? selectedTextColor
+            cell.highlightTextColor = cellConfiguration(index, cell) ?? selectedTextColor
         }
         
 		if let cellConfiguration = cellConfiguration {
